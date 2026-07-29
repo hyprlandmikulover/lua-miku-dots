@@ -1,0 +1,69 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 28,
+    "spacing": 4,
+    "margin-top": 8,
+    "margin-left": 8,
+    "margin-right": 8,
+    "modules-left": ["custom/logo", "hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["battery", "pulseaudio", "bluetooth", "network", "cpu", "memory", "custom/gpu", "tray"],
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "persistent-workspaces": {
+            "eDP-1": [1, 2, 3, 4, 5]
+        }
+    },
+    "custom/logo": {
+        "format": "{}",
+        "exec": "echo ''",
+        "interval": 86400,
+        "tooltip": false
+    },
+    "clock": {
+        "format": "{:%I:%M %p}",
+        "tooltip-format": "{:%A, %B %d %Y}",
+        "interval": 30
+    },
+    "cpu": {
+        "format": "cpu {usage}%",
+        "interval": 5,
+        "on-click": "kitty btop"
+    },
+    "memory": {
+        "format": "mem {}%",
+        "interval": 5,
+        "on-click": "kitty btop"
+    },
+    "pulseaudio": {
+        "format": "vol {volume}%",
+        "format-muted": "muted",
+        "on-click": "pavucontrol"
+    },
+    "bluetooth": {
+        "format": "bluetooth {status}",
+        "format-connected": "bluetooth {num_connections}",
+        "format-disabled": "",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n{num_connections} devices",
+        "on-click": "blueman-manager"
+    },
+    "battery": {
+        "format": "bat {capacity}%"
+    },
+    "custom/gpu": {
+        "exec": "/home/arch/.config/waybar/gpu.sh",
+        "interval": 5,
+        "on-click": "kitty btop"
+    },
+    "network": {
+        "format-wifi": "wifi",
+        "format-ethernet": "eth",
+        "format-disconnected": "off",
+        "tooltip-format": "{essid} ({signalStrength}%)"
+    },
+    "tray": {
+        "icon-size": 14,
+        "spacing": 6
+    }
+}

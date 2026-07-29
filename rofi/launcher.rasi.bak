@@ -1,0 +1,64 @@
+* {
+    font: "monospace 10";
+    foreground: #4169e1;
+    background-color: transparent;
+    border-size: 0;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window {
+    width: 350px;
+    location: center;
+    x-offset: 50px;
+    padding: 8px;
+    background-image: url("/tmp/rofi-bg.png", both);
+    background-color: rgba ( 0, 0, 0, 0 % );
+    border-color: #334466;
+    border-size: 1;
+    border-radius: 6px;
+}
+
+prompt {
+    enabled: false;
+}
+
+inputbar {
+    padding: 5px 10px;
+    background-color: rgba ( 0, 0, 0, 35 % );
+}
+
+entry {
+    background-color: transparent;
+    placeholder: "search...";
+    placeholder-color: #565f89;
+    text-color: #4169e1;
+    caret-color: #4169e1;
+}
+
+listview {
+    lines: 5;
+    padding: 5px 0;
+    background-color: rgba ( 0, 0, 0, 35 % );
+}
+
+element {
+    padding: 4px 10px;
+    background-color: transparent;
+    border-radius: 3px;
+}
+
+element selected {
+    background-color: rgba ( 122, 162, 247, 25 % );
+    text-color: #7aa2f7;
+}
+
+element-icon {
+    margin: 0 8px 0 0;
+}
+
+element-text {
+    text-color: #8aa9f0;
+    background-color: transparent;
+}
