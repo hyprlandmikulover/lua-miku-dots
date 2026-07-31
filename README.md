@@ -1,5 +1,21 @@
 # lua-miku-dots
 
+# YOU WILL NEED TO INSTALL 
+- WAYBAR
+- ROFI
+- XDG-DESKTOP-PORTAL
+- KITTY
+- HYPRLAND
+- DOLPHIN
+- FASTFETCH
+
+
+
+  # HAVE FUN LARPING!! xx
+
+
+
+
 Super + Enter	App launcher (rofi)
 
 Super + Q	Close window
