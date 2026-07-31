@@ -44,6 +44,7 @@ REPO_PACKAGES=(
     fastfetch
     xdg-desktop-portal
     xdg-desktop-portal-hyprland
+    awww
 )
 AUR_PACKAGES=(ani-cli)
 
