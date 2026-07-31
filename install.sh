@@ -35,11 +35,65 @@ install_dir() {
     info "linked dir $src → $target"
 }
 
+REPO_PACKAGES=(
+    hyprland
+    waybar
+    kitty
+    rofi
+    dolphin
+    fastfetch
+    xdg-desktop-portal
+    xdg-desktop-portal-hyprland
+)
+AUR_PACKAGES=(ani-cli)
+
+install_paru() {
+    info "no AUR helper found; installing base-devel + git, then building paru"
+    sudo pacman -S --needed --noconfirm base-devel git
+    local tmp
+    tmp="$(mktemp -d)"
+    git clone https://aur.archlinux.org/paru.git "$tmp/paru"
+    (cd "$tmp/paru" && makepkg -si --noconfirm)
+    rm -rf "$tmp"
+}
+
+install_packages() {
+    if command -v pacman >/dev/null 2>&1; then
+        if ! pacman -Qq "${REPO_PACKAGES[@]}" >/dev/null 2>&1; then
+            info "installing packages: ${REPO_PACKAGES[*]}"
+            sudo pacman -S --needed --noconfirm "${REPO_PACKAGES[@]}"
+        fi
+
+        for pkg in "${AUR_PACKAGES[@]}"; do
+            if ! pacman -Qq "$pkg" >/dev/null 2>&1; then
+                if command -v paru >/dev/null 2>&1; then
+                    info "installing $pkg via paru"
+                    paru -S --needed --noconfirm "$pkg"
+                elif command -v yay >/dev/null 2>&1; then
+                    info "installing $pkg via yay"
+                    yay -S --needed --noconfirm "$pkg"
+                else
+                    install_paru
+                    if command -v paru >/dev/null 2>&1; then
+                        paru -S --needed --noconfirm "$pkg"
+                    else
+                        warn "paru build failed; install $pkg manually from https://aur.archlinux.org/packages/ani-cli"
+                    fi
+                fi
+            fi
+        done
+    else
+        warn "no pacman found; install manually: ${REPO_PACKAGES[*]} ${AUR_PACKAGES[*]}"
+    fi
+}
+
 main() {
     echo "$(color 6)󰋗 Miku Hyprland Dotfiles Installer$(reset)"
     echo
 
     [ -d "$DOTFILES" ] || { err "$DOTFILES not found"; exit 1; }
+
+    install_packages
 
     install_link "$DOTFILES/hypr/hyprland.lua"           "$HOME/.config/hypr/hyprland.lua"
     install_link "$DOTFILES/kitty/kitty.conf"             "$HOME/.config/kitty/kitty.conf"
